@@ -9,7 +9,6 @@ load_dotenv()
 DATABASE_PATH = os.getenv('DATABASE_PATH')
 
 def create_database():
-    # Connect to SQLite database (creates if not exists)
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
     
@@ -18,7 +17,7 @@ def create_database():
     
     # Create extracted_emails_table
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS extracted_emails_table (
+        CREATE TABLE IF NOT EXISTS extracted_emails (
             email_id VARCHAR PRIMARY KEY,
             thread_id VARCHAR,
             labels TEXT,  -- Store list as JSON string
@@ -32,19 +31,80 @@ def create_database():
         )
     ''')
     
-    # Create agent_responses table
+    # Create summaries table
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS agent_responses (
+        CREATE TABLE IF NOT EXISTS summaries (
+            summary_id INTEGER PRIMARY KEY AUTOINCREMENT,
             email_id VARCHAR,
+            model VARCHAR,
+            temperature NUMERIC,
+            system_prompt TEXT,
+            user_prompt TEXT,
             summary TEXT,
-            affirmative_reply TEXT,
-            negative_reply TEXT,
             processing_timestamp TIMESTAMP,
-            FOREIGN KEY (email_id) REFERENCES extracted_emails_table(email_id)
+            prompt_tokens INTEGER,
+            completion_tokens INTEGER,
+            total_tokens INTEGER,
+            reported BOOLEAN,
+            FOREIGN KEY (email_id) REFERENCES extracted_emails(email_id)
         )
     ''')
 
-    # Commit changes and close connection
+    # Create affirmative replies table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS affirmative_drafts (
+            affirmative_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email_id VARCHAR,
+            model VARCHAR,
+            temperature NUMERIC,
+            system_prompt TEXT,
+            user_prompt TEXT,
+            affirmative_draft TEXT,
+            processing_timestamp TIMESTAMP,
+            prompt_tokens INTEGER,
+            completion_tokens INTEGER,
+            total_tokens INTEGER,
+            FOREIGN KEY (email_id) REFERENCES extracted_emails(email_id)
+        )
+    ''')
+
+    # Create negative replies table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS negative_drafts (
+            negative_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            email_id VARCHAR,
+            model VARCHAR,
+            temperature NUMERIC,
+            system_prompt TEXT,
+            user_prompt TEXT,
+            negative_draft TEXT,
+            processing_timestamp TIMESTAMP,
+            prompt_tokens INTEGER,
+            completion_tokens INTEGER,
+            total_tokens INTEGER,
+            FOREIGN KEY (email_id) REFERENCES extracted_emails(email_id)
+        )
+    ''')
+
+    # Create reports table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS reports (
+            report_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            date_from TIMESTAMP,
+            date_to TIMESTAMP,
+            emails_reported TEXT, -- Store list as JSON string
+            model VARCHAR,
+            temperature NUMERIC,
+            system_prompt TEXT,
+            user_prompt TEXT,
+            report TEXT,
+            report_timestamp TIMESTAMP,
+            prompt_tokens INTEGER,
+            completion_tokens INTEGER,
+            total_tokens INTEGER
+        )
+    ''')
+
     conn.commit()
     conn.close()
 
@@ -53,7 +113,7 @@ def delete_duplicates(df):
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
 
-    ids = cursor.execute("SELECT email_id FROM extracted_emails_table").fetchall()
+    ids = cursor.execute("SELECT email_id FROM extracted_emails").fetchall()
     existing_ids = [t[0] for t in ids]
     new_emails = df[~df['email_id'].isin(existing_ids)]
 
@@ -74,6 +134,7 @@ def insert_data(df, table_name):
 
     conn.commit()
     conn.close()
+    print(f'Inserted into {table_name} {len(df)} rows')
 
 
 def emails_unprocessed():
@@ -107,23 +168,23 @@ def emails_unprocessed():
     df_unprocessed = pd.DataFrame(cursor.execute(query).fetchall())
     df_unprocessed.columns = ['email_id', 'thread_id', 'subject', 'sender', 'body', 'sent_datetime', 'processed']
     df_unprocessed.set_index('email_id', inplace=True)
-    dict_df_unprocessed = df_unprocessed.to_dict('index')
+    dict_unprocessed = df_unprocessed.to_dict('index')
 
     cursor.close()
     conn.close()
-    return dict_df_unprocessed
+    return dict_unprocessed
 
 
-def set_processed_true(email_ids):
-    email_ids = tuple(email_ids)
+def set_true(email_ids, table_name, column_name):
+
     try:
         # Connect to the database
         conn = sqlite3.connect(DATABASE_PATH)
         cursor = conn.cursor()
         placeholders = ",".join("?" for _ in email_ids)
         cursor.execute(f"""
-            UPDATE extracted_emails_table
-            SET processed = 1
+            UPDATE {table_name}
+            SET {column_name} = 1
             WHERE email_id IN ({placeholders})""", email_ids)
         
         # Commit the transaction
@@ -133,10 +194,37 @@ def set_processed_true(email_ids):
 
     except Exception as e:
         print(f"Error occurred: {e}")
-        print("Email ids to set true : ",email_ids)
+        print("Email ids to set true : ", email_ids)
     finally:
         if conn:
             conn.close()
+
+
+def summaries_unreported():
+    conn = sqlite3.connect(DATABASE_PATH)
+    cursor = conn.cursor()
+    query = """SELECT 
+                    s.summary_id,
+                    s.email_id,
+                    s.summary,
+                    s.reported,
+                    ee.sent_datetime
+                FROM summaries as s
+                LEFT JOIN extracted_emails as ee
+                ON s.email_id = ee.email_id
+                WHERE reported = 0
+                """
+    df_unreported = pd.DataFrame(cursor.execute(query).fetchall())
+    df_unreported.columns = ['summary_id', 'email_id', 'summary', 'reported', 'sent_datetime']
+    df_unreported.sort_values('sent_datetime', inplace=True)
+    df_unreported.set_index('email_id', inplace=True)
+    dt_from = df_unreported.min()
+    dt_to = df_unreported.max()
+    dict_unreported = df_unreported.to_dict('index')
+
+    cursor.close()
+    conn.close()
+    return dict_unreported, dt_from, dt_to
 
 
 if __name__ == '__main__':

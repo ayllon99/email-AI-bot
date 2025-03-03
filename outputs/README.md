@@ -16,3 +16,7 @@ Outputs are stored in summary_response.txt, affirmative_response.txt and negativ
 
 As I mentioned above, this is a lightweight model so outputs are not as accurate as we could get.
 Due to this (or not a good enough prompt), affirmative_response and negative_response are not responses to the email but the same email with a different focus.
+
+## Next Steps
+
+* Try a better model using deep think
