@@ -2,7 +2,8 @@
 
 ## TO DO
 
-* Check if dt_from and dt_to is working properly
+* Check if dt_from and dt_to are working properly
+* Change database documentation
 
 ## Target of the project
 
