@@ -8,6 +8,7 @@ load_dotenv()
 
 DATABASE_PATH = os.getenv('DATABASE_PATH')
 
+
 def create_database():
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
@@ -153,12 +154,9 @@ def set_true(email_ids, table_name, column_name):
             UPDATE {table_name}
             SET {column_name} = 1
             WHERE email_id IN ({placeholders})""", email_ids)
-        
-        # Commit the transaction
-        conn.commit()
-        
-        print(f"Updated {cursor.rowcount} rows successfully")
 
+        conn.commit()
+        print(f"Updated {cursor.rowcount} rows successfully")
     except Exception as e:
         print(f"Error occurred: {e}")
         print("Email ids to set true : ", email_ids)
