@@ -41,47 +41,12 @@ def create_database():
             system_prompt TEXT,
             user_prompt TEXT,
             summary TEXT,
+            llm_think TEXT,
             processing_timestamp TIMESTAMP,
             prompt_tokens INTEGER,
             completion_tokens INTEGER,
             total_tokens INTEGER,
             reported BOOLEAN,
-            FOREIGN KEY (email_id) REFERENCES extracted_emails(email_id)
-        )
-    ''')
-
-    # Create affirmative replies table
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS affirmative_drafts (
-            affirmative_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email_id VARCHAR,
-            model VARCHAR,
-            temperature NUMERIC,
-            system_prompt TEXT,
-            user_prompt TEXT,
-            affirmative_draft TEXT,
-            processing_timestamp TIMESTAMP,
-            prompt_tokens INTEGER,
-            completion_tokens INTEGER,
-            total_tokens INTEGER,
-            FOREIGN KEY (email_id) REFERENCES extracted_emails(email_id)
-        )
-    ''')
-
-    # Create negative replies table
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS negative_drafts (
-            negative_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email_id VARCHAR,
-            model VARCHAR,
-            temperature NUMERIC,
-            system_prompt TEXT,
-            user_prompt TEXT,
-            negative_draft TEXT,
-            processing_timestamp TIMESTAMP,
-            prompt_tokens INTEGER,
-            completion_tokens INTEGER,
-            total_tokens INTEGER,
             FOREIGN KEY (email_id) REFERENCES extracted_emails(email_id)
         )
     ''')
@@ -98,6 +63,7 @@ def create_database():
             system_prompt TEXT,
             user_prompt TEXT,
             report TEXT,
+            llm_think TEXT,
             report_timestamp TIMESTAMP,
             prompt_tokens INTEGER,
             completion_tokens INTEGER,
@@ -166,7 +132,8 @@ def emails_unprocessed():
                 WHERE row_num = 1 AND processed = 0
                 """
     df_unprocessed = pd.DataFrame(cursor.execute(query).fetchall())
-    df_unprocessed.columns = ['email_id', 'thread_id', 'subject', 'sender', 'body', 'sent_datetime', 'processed']
+    df_unprocessed.columns = ['email_id', 'thread_id', 'subject', 'sender',
+                              'body', 'sent_datetime', 'processed']
     df_unprocessed.set_index('email_id', inplace=True)
     dict_unprocessed = df_unprocessed.to_dict('index')
 
@@ -218,13 +185,14 @@ def summaries_unreported():
     df_unreported.columns = ['summary_id', 'email_id', 'summary', 'reported', 'sent_datetime']
     df_unreported.sort_values('sent_datetime', inplace=True)
     df_unreported.set_index('email_id', inplace=True)
-    dt_from = df_unreported.min()
-    dt_to = df_unreported.max()
-    dict_unreported = df_unreported.to_dict('index')
+    
+    dt_from = df_unreported['sent_datetime'].min()
+    dt_to = df_unreported['sent_datetime'].max()
+    summaries_unreported_dict = df_unreported.to_dict('index')
 
     cursor.close()
     conn.close()
-    return dict_unreported, dt_from, dt_to
+    return summaries_unreported_dict, dt_from, dt_to
 
 
 if __name__ == '__main__':

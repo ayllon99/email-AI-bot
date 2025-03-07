@@ -1,0 +1,7 @@
+- **Issue:** 429 errors occurring during stress testing of Project Gamma's real-time API due to Twitter API rate limits (900 requests/15 min).  
+- **Current Mitigation:** Basic retry logic with 3 attempts.  
+- **Proposed Solutions:**  
+  - Implement exponential backoff with jitter.  
+  - Submit a request to Twitter's dev team to increase the quota.  
+- **Request for Input:** Seeking your preference on the proposed solutions.  
+- **Deadline:** Resolution required by end of day Friday as per the product team's request.

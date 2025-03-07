@@ -1,0 +1,15 @@
+Subject: Project Beta – Urgent: Data Source Alignment for Segmentation Accuracy
+Hi Jose,
+I hope you’re doing well. I’m reaching out regarding Project Beta’s customer segmentation model. During my analysis of the transactional data pipeline outputs (version beta_trans_v2.1), I noticed inconsistencies in the schema—specifically, missing customer_id fields in 12% of records and mismatched date formats (UTC vs. local timestamps). This is causing misalignment in our clustering algorithm’s accuracy.
+
+I’ve attached a sample dataset highlighting the discrepancies. Could we schedule a 15-minute sync to confirm:
+
+If the pipeline’s transformation logic intentionally drops these fields, or if this is a bug.
+
+Whether timestamps can be standardized to UTC across all Beta datasets.
+
+This is critical to meet the Q3 deadline. Let me know your availability!
+Best regards,
+Lila Chen
+Senior Data Analyst | Customer Analytics Team
+

@@ -1,0 +1,9 @@
+- **Clarification Needed on Timestamp Consistency**:  
+  - The purchase_timestamp field in the pipeline output needs to be confirmed as UTC or local time to ensure accurate feature engineering for Project Beta.  
+
+- **Specific Questions for Jose**:  
+  - Is the pipeline converting all timestamps to UTC before saving to Snowflake?  
+  - If not, is there a timezone metadata field available to standardize this?  
+
+- **Importance of Clarification**:  
+  - This information is critical for model training, which is scheduled to begin next week.

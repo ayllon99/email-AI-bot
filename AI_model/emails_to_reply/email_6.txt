@@ -1,0 +1,15 @@
+Subject: Project Gamma – User Session Mismatch in Dashboard Data**
+Hi Jose,
+I’m validating the user session metrics for Project Gamma’s dashboard and noticed a 22% discrepancy between the dashboard’s counts and the raw Snowflake logs. For example, on 2023-10-05:
+
+Snowflake: 1.2M sessions
+
+Dashboard: 936K sessions
+
+I suspect deduplication logic in the pipeline might be overly aggressive. Could you confirm if the session_id field in the cleaned data uses deterministic hashing? I’ve shared a sample query [here].
+
+I’d appreciate your help—this is blocking my QA sign-off.
+Best,
+Tomás Rivera
+Junior Data Analyst | Analytics QA
+

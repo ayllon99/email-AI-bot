@@ -1,0 +1,6 @@
+- The customer segmentation model (PyTorch-based) is ready for staging but requires GPU-enabled nodes in the Kubernetes cluster.  
+- Testing on CPU nodes resulted in an inference latency of ~2s/user, exceeding the SLA of 500ms.  
+- Proposed solutions:  
+  - Provision GPU nodes (e.g., AWS p3.2xlarge) in the EKS cluster.  
+  - Optimize the model with ONNX runtime for CPU (requires engineering bandwidth).  
+- Request for advice on feasibility and timelines, as node configurations are managed by Jose's team.

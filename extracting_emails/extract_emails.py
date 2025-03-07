@@ -45,7 +45,6 @@ def get_emails(service, max_results=50):
             maxResults=max_results
         ).execute()
         messages = result.get('messages', [])
-        # print('messages: ',messages)
         # Process each email
         for msg in messages:
             msg_data = service.users().messages().get(
@@ -77,30 +76,18 @@ def get_emails(service, max_results=50):
             else:
                 body = email_msg.get_payload(decode=True).decode()
 
-            """
-            print('-----------------------')
-            print(f"email_id: {msg_data['id']}")
-            print(f"threadId: {msg_data['threadId']}")
-            print(f"labelIds: {labels}")
-            print(f"Subject: {subject}")
-            print(f"From: {sender}")
-            print(f"Date: {date}")
-            print(f"Date: {parsed_datetime}")
-            print(f"Body: {body}")
-            print('-----------------------')
-            """
             now = datetime.now().isoformat()
-            msg_df = pd.DataFrame({'email_id':[msg_data['id']],
-                                   'thread_id':[msg_data['threadId']],
-                                   'labels':[labels],
-                                   'sent_datetime':[parsed_datetime],
-                                   'subject':[subject],
-                                   'sender':[sender],
-                                   'email_from':[email_from],
-                                   'body':[body],
-                                   'processed':[False],
-                                   'extraction_timestamp':[now]})
-            df = pd.concat([df,msg_df])
+            msg_df = pd.DataFrame({'email_id': [msg_data['id']],
+                                   'thread_id': [msg_data['threadId']],
+                                   'labels': [labels],
+                                   'sent_datetime': [parsed_datetime],
+                                   'subject': [subject],
+                                   'sender': [sender],
+                                   'email_from': [email_from],
+                                   'body': [body],
+                                   'processed': [False],
+                                   'extraction_timestamp': [now]})
+            df = pd.concat([df, msg_df])
     except Exception as e:
         print(f"Error: {e}")
     return df

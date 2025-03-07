@@ -1,0 +1,6 @@
+- **Issue:** The current 6-hour training data refresh cycle for Project Beta is causing bottlenecks in model iteration.  
+- **Proposal:**  
+  - Transition from Airflow's hourly batches to Kafka streams for incremental updates to reduce latency to 1 hour.  
+  - Prioritize this change in the upcoming sprint planning.  
+- **Expected Outcome:** Reducing latency could improve the F1-score by ~15% by capturing real-time purchase trends.  
+- **Request:** The business team is pushing for faster iterations, and your input on this matter would be invaluable.

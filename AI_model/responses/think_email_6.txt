@@ -1,0 +1,21 @@
+Okay, so I need to summarize this email into bullet points. Let me read through it again to make sure I understand everything.
+
+The subject is about a user session mismatch in Project Gamma's dashboard data. The sender is Tomás Rivera, a Junior Data Analyst in Analytics QA. He's writing to Jose.
+
+In the email, Tomás mentions that he's validating user session metrics and found a 22% discrepancy. On a specific date, October 5, 2023, Snowflake shows 1.2M sessions, but the dashboard only shows 936K. That's a significant difference. He suspects the deduplication logic in the pipeline might be too aggressive. He's asking Jose to confirm if the session_id field uses deterministic hashing and has shared a sample query for reference. He also mentions that this issue is blocking his QA sign-off and would appreciate Jose's help.
+
+So, the key points are:
+- Discrepancy found between dashboard and Snowflake data.
+- Specific numbers for the date mentioned.
+- Suspected cause is aggressive deduplication logic.
+- Request to confirm if session_id uses deterministic hashing.
+- Shared a sample query.
+- Impact on QA sign-off.
+
+I need to structure these points clearly and concisely, making sure each bullet captures the essential information without being too wordy. Also, the tone should remain professional and respectful, as per the original email.
+
+I should start with the main issue, then provide the specific data points, followed by the suspected cause, the request for confirmation, mention the shared query, and end with the impact on QA. That should cover everything Tomás is conveying.
+
+Let me make sure I'm not missing any details. The subject line is clear, so that's a good start. The body provides context, specific numbers, a hypothesis, a request, and the reason for urgency. I think I've got all the necessary components.
+
+Now, I'll translate these into bullet points, ensuring each one is a concise statement that captures the essence without losing important details.

@@ -1,0 +1,14 @@
+Subject: Project Beta – Timestamp Consistency for Feature Engineering
+Hi Jose,
+I'm engineering time-based features (e.g., "hours since last purchase") for Project Beta's model, but I'm unsure if the purchase_timestamp field in the pipeline output is UTC or local time. The raw data includes both (e.g., UTC-5 for US users).
+
+Could you clarify:
+
+Does the pipeline convert all timestamps to UTC before saving to Snowflake?
+
+If not, is there a timezone metadata field I can join to standardize this?
+
+This will impact model training starting next week. Thanks for your help!
+Best regards,
+Elena Popescu
+Junior Data Scientist | Feature Engineering Team

@@ -1,0 +1,7 @@
+- Request for Spark configuration review for Project Alpha's data pipeline.
+- Current setup: 4GB memory and 2 cores per executor, resulting in OutOfMemoryError with 10GB JSON files.
+- Specific questions:
+  - Increase executor memory to 8GB?
+  - Enable dynamic allocation or adjust shuffle partitions?
+  - Best practices for handling nested JSON.
+- Request for a quick Teams call.

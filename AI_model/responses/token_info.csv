@@ -1,0 +1,11 @@
+,email_ids,models,prompts_tokens,completions_tokens,totals_tokens,timestamps
+0,email_1,deepseek-r1-distill-llama-70b,599,520,1119,07-03-2025_12:59:06
+1,email_10,deepseek-r1-distill-llama-70b,522,386,908,07-03-2025_12:59:08
+2,email_2,deepseek-r1-distill-llama-70b,568,487,1055,07-03-2025_12:59:11
+3,email_3,deepseek-r1-distill-llama-70b,552,395,947,07-03-2025_12:59:13
+4,email_4,deepseek-r1-distill-llama-70b,548,342,890,07-03-2025_12:59:15
+5,email_5,deepseek-r1-distill-llama-70b,536,508,1044,07-03-2025_12:59:18
+6,email_6,deepseek-r1-distill-llama-70b,558,542,1100,07-03-2025_12:59:21
+7,email_7,deepseek-r1-distill-llama-70b,535,369,904,07-03-2025_12:59:23
+8,email_8,deepseek-r1-distill-llama-70b,527,328,855,07-03-2025_12:59:26
+9,email_9,deepseek-r1-distill-llama-70b,539,444,983,07-03-2025_12:59:34

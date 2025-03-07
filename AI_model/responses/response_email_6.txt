@@ -1,0 +1,6 @@
+- **Discrepancy Identified**: A 22% mismatch exists between Project Gamma's dashboard and Snowflake data.
+- **Data Comparison**: On 2023-10-05, Snowflake recorded 1.2M sessions, while the dashboard showed 936K sessions.
+- **Suspected Cause**: Aggressive deduplication logic in the pipeline may be causing the discrepancy.
+- **Request for Confirmation**: Please confirm if the session_id field uses deterministic hashing.
+- **Supporting Material**: A sample query has been shared for reference.
+- **Impact on QA**: This issue is currently blocking QA sign-off.

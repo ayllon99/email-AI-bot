@@ -1,0 +1,13 @@
+Okay, so I need to summarize this email into bullet points. Let me read through it again to make sure I understand everything.
+
+The subject is about Project Beta and the issue with training data latency affecting model iteration. The sender is Nia Okoro, a mid-level data scientist, and she's addressing Jose. 
+
+In the email, Nia explains that the current 6-hour refresh cycle is causing bottlenecks. She mentions that reducing latency to 1 hour could improve the F1-score by about 15% by capturing real-time purchase trends. That's a significant improvement, so that's a key point.
+
+She then acknowledges that Jose's team manages the pipeline's batch scheduling. She proposes two main suggestions: switching from Airflow's hourly batches to Kafka for incremental updates and prioritizing this change in the next sprint planning. 
+
+She also mentions that the business team is pushing for faster iterations and values Jose's input. 
+
+So, I need to break this down into clear bullet points. I should start with the main issue, then the proposed solutions, and finally the request for prioritization. I should keep the language professional and concise, avoiding any markdown as per the instructions.
+
+I should make sure each bullet captures the essence without being too wordy. Let me structure it step by step to ensure I cover all the important points Nia made.

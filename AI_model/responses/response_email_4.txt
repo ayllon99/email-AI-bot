@@ -1,0 +1,7 @@
+- The Gamma dashboard is experiencing 8-10 second latency during peak traffic (2-4 PM daily), leading to user complaints.
+- Current Redshift infrastructure: 4 nodes (dc2.large) with no caching layer.
+- Proposed solutions to resolve performance issues:
+  - Scale vertically by upgrading to ra3.4xlarge nodes for improved compute power.
+  - Implement a caching layer using Redis for frequently accessed queries (e.g., daily active users).
+  - Optimize queries by materializing views for complex joins.
+- Request for cost-effectiveness analysis and a meeting with Jose to discuss the options.

@@ -1,0 +1,20 @@
+Subject: Project Gamma – Redshift Performance Tuning for Dashboard Load
+Jose,
+The Gamma dashboard’s backend queries are experiencing 8-10 second latency during peak traffic (2-4 PM daily), leading to user complaints. Current infrastructure:
+
+Redshift cluster: 4 nodes (dc2.large)
+
+No caching layer
+
+Options to resolve this:
+
+Scale vertically: Upgrade to ra3.4xlarge nodes for better compute.
+
+Implement caching: Use Redis for frequent queries (e.g., daily active users).
+
+Optimize queries: Materialize views for complex joins.
+
+I’d like your take on the most cost-effective solution. Can we meet tomorrow to discuss?
+Cheers,
+Marco Silva
+Senior BI Developer | Visualization Team

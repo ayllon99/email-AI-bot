@@ -1,0 +1,22 @@
+Okay, I need to summarize this email into bullet points. Let me read through it carefully.
+
+The subject is about Project Beta and GPU resource constraints for model deployment. The sender is Yuna Kim, a mid-level ML engineer on the deployment team. She's writing to Jose.
+
+In the email, Yuna mentions that the customer segmentation model, which is PyTorch-based, is ready for staging. However, the Kubernetes cluster doesn't have GPU-enabled nodes. They tested it on CPU nodes and saw an inference latency of about 2 seconds per user, which is way over the SLA of 500ms. That's a problem because it's four times slower than what's allowed.
+
+She presents two options. The first is to provision GPU nodes, specifically mentioning AWS p3.2xlarge instances in the EKS cluster. The second option is to optimize the model using ONNX runtime for CPU, but that would require some engineering effort.
+
+She also notes that according to the ML Ops roadmap, Jose's team is responsible for node configurations. She's asking Jose for advice on the feasibility and timelines of these options.
+
+So, the key points are:
+
+- Model is ready for staging but lacks GPU nodes.
+- CPU testing shows high latency, exceeding SLA.
+- Two options: add GPU nodes or optimize the model.
+- Request for feasibility and timeline advice from Jose.
+
+I need to structure these points clearly and concisely, making sure each bullet captures the essence without being too wordy. I should avoid any technical jargon that's not necessary and ensure the tone remains professional.
+
+Let me make sure each bullet starts with a strong verb or noun to make it clear. Also, I should maintain the order of importance, starting with the issue, then the problem, the options, and finally the request.
+
+I think that's all. Now, I'll format it into bullet points as per the instructions.

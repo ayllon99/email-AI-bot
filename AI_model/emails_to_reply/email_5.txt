@@ -1,0 +1,14 @@
+Subject: Project Beta – GPU Resource Constraints for Model Deployment**
+Hi Jose,
+The customer segmentation model (PyTorch-based) is ready for staging, but the Kubernetes cluster lacks GPU-enabled nodes. Our tests on CPU nodes show inference latency of ~2s/user, which exceeds the SLA of 500ms.
+
+Options:
+
+Provision GPU nodes (e.g., AWS p3.2xlarge) in the EKS cluster.
+
+Optimize the model with ONNX runtime for CPU (requires engineering bandwidth).
+
+The ML Ops roadmap suggests your team manages node configurations. Could you advise on feasibility and timelines?
+Thanks!
+Yuna Kim
+Mid-Level ML Engineer | Deployment Team

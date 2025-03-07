@@ -1,0 +1,18 @@
+Subject: Project Alpha – Scalability Risks in Current Pipeline Design**
+Jose,
+Let’s schedule a architecture review for Project Alpha. The current Kafka-to-Spark pipeline handles 50K events/sec, but post-Q4 scaling requires 500K events/sec. Key concerns:
+
+Kafka topic partitioning is static (12 partitions).
+
+Spark streaming uses FAIR scheduling, which may not scale.
+
+Recommendations:
+
+Increase Kafka partitions to 60 + dynamic scaling.
+
+Switch to async checkpointing in Spark.
+
+Are you available Thursday to walk through this? The CTO flagged this as high-priority.
+Regards,
+Anika Desai
+Senior Data Architect | Infrastructure Design

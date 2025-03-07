@@ -1,0 +1,14 @@
+Subject: Project Alpha – Spark Config Review Request (Urgent)
+Hi Jose,
+I’m working on the Spark cluster setup for Project Alpha’s data pipeline and could use your expertise. Following the documentation, I configured the executors with 4GB memory and 2 cores each, but during testing, the job failed with OutOfMemoryError when processing the larger JSON files (~10GB).
+
+I’ve attached my YAML configs and the error logs. Could you review whether:
+
+The executor memory should be increased to 8GB.
+
+We should enable dynamic allocation or adjust shuffle partitions.
+
+I’d also appreciate guidance on best practices for handling nested JSON in this context. Are you free for a quick Teams call today?
+Thanks so much,
+Rahul Patel
+Junior Data Engineer | Pipeline Operations

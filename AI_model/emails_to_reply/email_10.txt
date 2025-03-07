@@ -1,0 +1,18 @@
+Subject: Project Alpha – Snowflake Write Permissions for CI/CD Pipeline**
+Jose,
+The CI/CD pipeline for Project Alpha (GitHub Actions → Terraform → AWS/EKS) is failing during the Snowflake write step due to insufficient permissions for the alpha_deploy service account.
+
+Error:
+
+INSERT permission denied on table raw_transactions  
+
+Request:
+
+Grant INSERT, UPDATE on raw_transactions to alpha_deploy.
+
+Approve the Terraform PR [#2241] to automate this.
+
+Can your team action this today? Deployment is blocked.
+Cheers,
+Arjun Kapoor
+Senior DevOps Engineer | Cloud Operations

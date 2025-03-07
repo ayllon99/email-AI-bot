@@ -1,0 +1,11 @@
+Alright, so I need to help Elena by summarizing her email into bullet points. Let me start by understanding the context of her message. She's working on Project Beta, specifically on engineering time-based features for the model. She's confused about whether the purchase_timestamp in the pipeline is in UTC or local time. The raw data has both, which is causing her concern.
+
+First, I should identify the key points she's making. She's asking two main questions: whether the pipeline converts timestamps to UTC before saving them to Snowflake, and if not, whether there's a timezone metadata field she can use to standardize this. She also mentions that this will affect model training starting next week, so there's some urgency here.
+
+Now, considering the relationship between Elena and Jose, she's addressing him in a polite and professional manner, so the summary should maintain that tone. I need to ensure that the bullet points are clear and concise, highlighting the two questions and the impact on the project.
+
+I should structure the bullet points to first state the main issue, then her specific questions, and finally the importance of the clarification. This way, Jose can quickly grasp the problem and the necessary actions.
+
+I'll avoid any closing remarks as per the instructions and make sure the language is professional without being too formal. Also, I need to correct any minor issues in the original text, like changing "e.g." to "Example" for clarity.
+
+So, putting it all together, the bullet points will clearly outline the problem, the questions, and the reason why this clarification is needed. That should effectively convey Elena's concerns and requests to Jose.

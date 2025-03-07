@@ -1,5 +1,9 @@
 # EMAIL BOT
 
+## TO DO
+
+* Check if dt_from and dt_to is working properly
+
 ## Target of the project
 
 This project aims to streamline email communication by providing two key functionalities:

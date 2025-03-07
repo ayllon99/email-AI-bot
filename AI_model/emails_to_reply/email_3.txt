@@ -1,0 +1,14 @@
+Subject: Project Beta – Training Data Latency Blocking Model Iteration
+Hi Jose,
+The current training data refresh cycle for Project Beta (every 6 hours) is creating bottlenecks for model iteration. Our initial tests show that reducing latency to 1 hour could improve the F1-score by ~15% by capturing real-time purchase trends.
+
+I understand the pipeline’s batch scheduling is managed by your team. Could we explore:
+
+Switching from Airflow’s hourly batches to a Kafka stream for incremental updates.
+
+Prioritizing this change in the sprint planning next week?
+
+The business team is pushing for faster iterations, and your input here would be invaluable.
+Regards,
+Nia Okoro
+Mid-Level Data Scientist | ML Modeling Team

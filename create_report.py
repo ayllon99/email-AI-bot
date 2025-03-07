@@ -1,28 +1,20 @@
 from database import database
-from extracting_emails import extract_emails
 from AI_model import AI_model_server as AI
-import json
-from datetime import datetime
-import pandas as pd
 
 
-summaries_to_report, dt_from, dt_to = database.summaries_unreported()
-emails_reported = json.dumps(list(summaries_to_report.keys()))
+#Check if new summaries to report
+summaries_unreported_dict, dt_from, dt_to = database.summaries_unreported()
 
-if len(summaries_to_report.keys()) > 0:
-    # Send to AI model and load respons
+# Send to AI model and load response
+if len(summaries_unreported_dict.keys()) > 0:
+    # Send to AI model and load response
     model = AI.ModelClient()
-    results = model.generate_report(summaries_to_report)
-    results['date_from'] = dt_from
-    results['date_to'] = dt_to
-    results['emails_reported'] = emails_reported
-    results['report_timestamp'] = datetime.now().isoformat()
-    reports_table = pd.DataFrame([results])
+    report_table = model.generate_report(summaries_unreported_dict,
+                                         dt_from, dt_to)
     try:
-        database.insert_data(reports_table, table_name='summaries')
-        database.set_true(list(summaries_to_report.keys()), 'summaries', 'reported')
-
+        database.insert_data(report_table, table_name='reports')
+        database.set_true(list(summaries_unreported_dict.keys()),
+                          'summaries', 'reported')
     except Exception as e:
-        print('Error inserting data into reports table')
-        print('Reports_table: ', reports_table)
-
+        print('Error inserting data into reports table', e)
+        print('Report_table: ', report_table)

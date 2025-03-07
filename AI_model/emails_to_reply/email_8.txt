@@ -1,0 +1,16 @@
+Subject: Project Gamma – API Rate Limits Causing 429 Errors**
+Hi Jose,
+During stress testing of Gamma’s real-time API (built with FastAPI), we’re hitting Twitter API rate limits (900 requests/15min), resulting in 429 errors. Current mitigation:
+
+Basic retry logic (3 attempts).
+
+Proposals:
+
+Exponential backoff: Implement with jitter.
+
+Quota increase: Submit a request to Twitter’s dev team.
+
+What’s your preference? The product team wants a resolution by EOD Friday.
+Thanks,
+Jamal Wright
+Mid-Level Data Engineer | API Integration Team
