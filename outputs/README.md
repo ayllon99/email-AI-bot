@@ -1,22 +1,49 @@
-# Outputs
+# Result of testing
 
-## Model
+## Conclusion
 
-In the test, I have used a self-hosted LLM model: Qwen/CodeQwen1.5-7B-Chat-GGUF/codeqwen-1_5-7b-chat-q4_0.gguf
+Considering tokens limits in groq cloud and the number of tokens we have used for 10 emails, we could be able to receive and report at least **70 emails per day** if we use the models with the most daily limitation (100.000 tokens per day).
 
-This model use just 4GB VRAM so it is a very lightweight model and we should get better results with something bigger like newer models of openai, or deepseek.
+### Total AI usage
 
-## Examples
+These are numbers to summarize 10 emails and create a report with all of them:
 
-In the first example I've just process an email stored in (email_to_reply.txt)
+|   n_emails | model                         |   prompts_tokens |   completions_tokens |   totals_tokens |
+|-----------:|:------------------------------|-----------------:|---------------------:|----------------:|
+|         10 | deepseek-r1-distill-llama-70b |             7226 |                 6154 |           13380 |
 
-Outputs are stored in summary_response.txt, affirmative_response.txt and negative_response.txt
+#### Results of summaries
 
-## Notes about outputs
+| email_ids   | models                        |   prompts_tokens |   completions_tokens |   totals_tokens |
+|:------------|:------------------------------|-----------------:|---------------------:|----------------:|
+| email_1     | deepseek-r1-distill-llama-70b |              599 |                  520 |            1119 |
+| email_10    | deepseek-r1-distill-llama-70b |              522 |                  386 |             908 |
+| email_2     | deepseek-r1-distill-llama-70b |              568 |                  487 |            1055 |
+| email_3     | deepseek-r1-distill-llama-70b |              552 |                  395 |             947 |
+| email_4     | deepseek-r1-distill-llama-70b |              548 |                  342 |             890 |
+| email_5     | deepseek-r1-distill-llama-70b |              536 |                  508 |            1044 |
+| email_6     | deepseek-r1-distill-llama-70b |              558 |                  542 |            1100 |
+| email_7     | deepseek-r1-distill-llama-70b |              535 |                  369 |             904 |
+| email_8     | deepseek-r1-distill-llama-70b |              527 |                  328 |             855 |
+| email_9     | deepseek-r1-distill-llama-70b |              539 |                  444 |             983 |
 
-As I mentioned above, this is a lightweight model so outputs are not as accurate as we could get.
-Due to this (or not a good enough prompt), affirmative_response and negative_response are not responses to the email but the same email with a different focus.
+##### Totals
 
-## Next Steps
+|   n_emails | model                         |   prompts_tokens |   completions_tokens |   totals_tokens |
+|-----------:|:------------------------------|-----------------:|---------------------:|----------------:|
+|         10 | deepseek-r1-distill-llama-70b |             5484 |                 4321 |            9805 |
 
-* Try a better model using deep think
+#### Results of reports
+
+|   n_emails | models                        |   prompts_tokens |   completions_tokens |   totals_tokens |
+|-----------:|:------------------------------|-----------------:|---------------------:|----------------:|
+|         10 | deepseek-r1-distill-llama-70b |             1742 |                 1833 |            3575 |
+
+### Rate limits in Groq cloud
+
+* RPM: Requests per minute
+* RPD: Requests per day
+* TPM: Tokens per minute
+* TPD: Tokens per day
+
+![rate-limits](rate-limits-groq.PNG)
