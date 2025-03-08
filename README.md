@@ -3,6 +3,7 @@
 ## TO DO
 
 * Check if dt_from and dt_to are working properly
+* How to show report
 
 ## Target of the project
 
@@ -64,12 +65,13 @@ python3 database/database.py
 
 ### 3. Use tool
 
-Run main.py setting max_results to a number of emails to extract.
+1. Set all your variables in .env file.
+2. Run extract_emails.py setting max_results to a number of emails to extract.
+3. Run email_analysis.py to summarize new emails in your database.
+4. Run create_report.py to generate a report incluiding information of all the email summaries not already include in a previous report.
 
 ## Notes
 
 - In threads we only need to process last email because all the thread is included in the last email body (To change this go to database.py in emails_unprocessed function)
 
 - We don't have in consideration if the email has been read or not so everything is going to work properly even if you open emails before the AI process them.
-
-- Consider each email is going to be processed 3 times by AI model: summarizing, affirmative reply and negative reply

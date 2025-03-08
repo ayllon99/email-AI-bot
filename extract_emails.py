@@ -1,10 +1,10 @@
 from database import database
-from extracting_emails import extract_emails
+from extracting_emails import get_emails
 
 
 # Extract and drop duplicates
-service = extract_emails.authenticate_gmail()
-data = extract_emails.get_emails(service=service, max_results=1)
+service = get_emails.authenticate_gmail()
+data = get_emails.get_emails(service=service, max_results=10)
 new_emails = database.delete_duplicates(data)
 
 # Check if new emails
