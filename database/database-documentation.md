@@ -2,7 +2,7 @@
 
 ## Main Diagram
 
-![img](./MainDiagram.svg)
+![img](./main-diagram.png)
 
 ## Tables
 
